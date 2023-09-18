@@ -10,34 +10,35 @@ Get the latest release from github...
 
 ```bash
 # $BINDIR may be any of the $PATH directories, eg: ~/bin, /usr/local/bin, etc... 
-curl -Lo $BINDIR/php https://github.com/yannoff/p-a-w/releases/latest/download/php
+curl -Lo $BINDIR/paw https://github.com/yannoff/p-a-w/releases/latest/download/paw
 # Make the main script executable
-chmod +x $BINDIR/php
+chmod +x $BINDIR/paw
 ```
 
 ...add support for the desired php versions
 
 ```bash
-ln -s $BINDIR/php $BINDIR/php5.6
-ln -s $BINDIR/php $BINDIR/php7.4
-ln -s $BINDIR/php $BINDIR/php8.0
+ln -s $BINDIR/paw $BINDIR/php
+ln -s $BINDIR/paw $BINDIR/php5.6
+ln -s $BINDIR/paw $BINDIR/php7.4
+ln -s $BINDIR/paw $BINDIR/php8.0
 ```
 
 ..and **that's it !**
 
 ## How it works
 
-Based on the  multi-call binary principle (as the well-known [BusyBox](https://busybox.net/about.html) project) , each `php<version>` **<sup>(1)</sup>** file is just a symlink pointing to the main [`php`](php) entrypoint script: PHP version is deduced from the invoked filename.
+Based on the  multi-call binary principle (as the well-known [BusyBox](https://busybox.net/about.html) project) , each `php<version>` **<sup>(1)</sup>** file is just a symlink pointing to the main [`paw`](paw) entrypoint script: PHP version is deduced from the invoked filename.
 
 > _**<sup>(1)</sup>** If invoked without any suffix, the default version will be used: either the [`PHP_VERSION`](#customizing) env var (if set), the latest GA release (currently 8.2) otherwise._ 
 
-Hence, adding support for a PHP version is dead-simple: just create a new `php<version>` **<sup>(2)</sup>** symlink to the main [`php`](php) script.
+Hence, adding support for a PHP version is dead-simple: just create a new `php<version>` **<sup>(2)</sup>** symlink to the main [`paw`](paw) script.
 
 _For example:_
 
 ```bash
 # Assume ~/bin is in the $PATH system-wide environment variable
-~/bin $ ln -s php php7.4
+~/bin $ ln -s paw php7.4
 # Now PHP 7.4 can be accessed from everywhere in the system
 ~/bin $ cd /some/other/path
 /some/other/path $ php7.4 --version
@@ -63,7 +64,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
 ## Examples
 
 _The following examples are given assuming that:_
-- _The `php` multi-call script is in one of the `$PATH` dirs_
+- _The `paw` multi-call script is in one of the `$PATH` dirs_
 - _A symlink to it has been created for each php version_
 
 

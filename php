@@ -17,8 +17,15 @@ version=${called//php/}
 [ -z "${image}" ] && image=yannoff/php-fpm
 
 _exec() {
-    [ -n "${PAW_DEBUG}" ] && echo "$*"
-    "$@"
+    [ -n "${PAW_DEBUG}" ] && echo "$*" >&2
+    # If stdout is not the terminal,
+    # suppress carriage returns from output
+    if [ -p /dev/stdout ] || [ -f /dev/stdout ]
+    then
+        "$@" | tr -d "\r"
+    else
+        "$@"
+    fi
 }
 
 args=()
@@ -60,8 +67,8 @@ args+=( --rm )
 # Run container in interactive mode
 args+=( --interactive )
 
-# Allocate a pseudo TTY, only if no piped input
-[ -p /dev/stdin ] || args+=( --tty )
+# If STDIN is not a pipe or a regular file, allocate a pseudo TTY
+[ -p /dev/stdin ] || [ -f /dev/stdin ] || args+=( --tty )
 
 # Run as standard, low-priviledged user
 args+=( -u $(id -u):$(id -g) )

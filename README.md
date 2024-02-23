@@ -29,7 +29,7 @@ ln -s $BINDIR/php $BINDIR/php8.0
 
 Based on the  multi-call binary principle (as the well-known [BusyBox](https://busybox.net/about.html) project) , each `php<version>` **<sup>(1)</sup>** file is just a symlink pointing to the main [`php`](php) entrypoint script: PHP version is deduced from the invoked filename.
 
-> _**<sup>(1)</sup>** If invoked without any suffix, the default version will be used: either the [`PHP_VERSION`](#customizing) env var (if set), the latest GA release (currently 8.2) otherwise._ 
+> _**<sup>(1)</sup>** If invoked without any suffix, the default version will be used: either the [`PHP_VERSION`](#customizing) env var (if set), the latest GA release (currently 8.3) otherwise._
 
 Hence, adding support for a PHP version is dead-simple: just create a new `php<version>` **<sup>(2)</sup>** symlink to the main [`php`](php) script.
 
@@ -58,7 +58,7 @@ Zend Engine v3.4.0, Copyright (c) Zend Technologies
  `8.0`,
  `8.1`,
  `8.2`,
-> `8.3-rc`_
+> `8.3`_
 
 ## Examples
 
@@ -89,7 +89,7 @@ _The following environment variables allow to fine-tune the PAW script behaviour
 
 Name|Description|Fallback value
 ---|---|---
-`PHP_VERSION`|The default version to use for `PHP`|`8.2`
+`PHP_VERSION`|The default version to use for `PHP`|`8.3`
 `PAW_IMAGE`|PHP docker image to leverage|[`yannoff/php-fpm`](https://github.com/yannoff/docker-php-fpm) **<sup>(3)</sup>**
 `PAW_DEBUG`|If set, turn on debug mode|-
 

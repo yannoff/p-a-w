@@ -32,14 +32,14 @@ args=()
 
 if [ "$#" -gt "0" ]
 then
+    # If first arg is an absolute path, mount it
+    [ "${1:0:1}" = "/" ] && args+=( -v ${1}:${1} )
+
     # If first arg is an option or a php file, assume "php" is implicit
     # This allow calling the script in the form: "php -a" or "php foo.php"
     if [ "${1#-}" != "$1" ] || grep '<?' "${1}" >/dev/null 2>&1
     then
         set -- php "$@"
-    else
-        # If first arg is an absolute path, mount it
-        [ "${1:0:1}" = "/" ] && args+=( -v ${1}:${1} )
     fi
 else
     # If no command or option specified, open a bash session

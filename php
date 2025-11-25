@@ -13,7 +13,7 @@ image=${PAW_IMAGE}
 called=$(basename $0)
 version=${called//php/}
 
-[ -z "${version}" ] && version=${PHP_VERSION:-8.4}
+[ -z "${version}" ] && version=${PHP_VERSION:-8.5}
 [ -z "${image}" ] && image=yannoff/php-fpm
 
 _exec() {
